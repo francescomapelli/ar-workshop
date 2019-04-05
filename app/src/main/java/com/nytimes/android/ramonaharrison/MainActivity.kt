@@ -2,10 +2,12 @@ package com.nytimes.android.ramonaharrison
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.MaterialFactory
+import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.ShapeFactory
 import com.google.ar.sceneform.ux.ArFragment
@@ -80,6 +83,17 @@ class MainActivity : AppCompatActivity() {
             .thenAccept { material ->
                 val shape = ShapeFactory.makeSphere(radius, Vector3(centerX, centerY, centerZ), material)
                 addNodeToScene(anchor, shape)
+            }
+    }
+
+    private fun placeObject(anchor: Anchor, model: Uri) {
+        ModelRenderable.builder()
+            .setSource(fragment.context, model)
+            .build()
+            .thenAccept { renderable -> addNodeToScene(anchor, renderable) }
+            .exceptionally { throwable ->
+                Toast.makeText(this@MainActivity, "Something went wrong!", Toast.LENGTH_SHORT).show()
+                null
             }
     }
 }
