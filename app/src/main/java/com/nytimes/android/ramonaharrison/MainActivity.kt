@@ -1,7 +1,6 @@
 package com.nytimes.android.ramonaharrison
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -38,7 +37,9 @@ class MainActivity : AppCompatActivity() {
         arFragment.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
             Log.d("LOG", "TAP!")
             val anchor = hitResult.createAnchor()
-            addSphere(Color.MAGENTA, anchor, 0.1f, 0.0f, 0.15f, 0.0f)
+            val uri = galleryAdapter.getSelected().getUri()
+            placeObject(anchor, uri)
+
         }
         galleryRecyclerview = findViewById<RecyclerView>(R.id.gallery_recyclerview).apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
