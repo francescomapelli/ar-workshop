@@ -62,3 +62,8 @@ sceneform.asset('sampledata/models/tiramisu.obj',
         'default',
         'sampledata/models/tiramisu.sfa',
         'src/main/assets/tiramisu')
+
+sceneform.asset('sampledata/models/fox_face.fbx',
+        'default',
+        'sampledata/models/fox_face.sfa',
+        'src/main/assets/fox_face')
