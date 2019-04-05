@@ -1,6 +1,8 @@
 package com.nytimes.android.ramonaharrison
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ar.core.Anchor
@@ -19,6 +22,7 @@ import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.ShapeFactory
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
+import com.nytimes.android.ramonaharrison.helpers.CameraHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val galleryAdapter = GalleryAdapter()
     private lateinit var galleryRecyclerview: RecyclerView
     private lateinit var arFragment: ArFragment
+    private lateinit var camera: CameraHelper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +51,14 @@ class MainActivity : AppCompatActivity() {
             adapter = galleryAdapter
             setHasFixedSize(true)
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+        }
+
+        camera = CameraHelper(this, arFragment.arSceneView)
+        fab.setOnClickListener { camera.snap() }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
