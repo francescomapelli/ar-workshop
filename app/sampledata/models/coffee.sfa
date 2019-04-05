@@ -88,7 +88,7 @@
     file: 'sampledata/models/coffee.obj',
     name: 'coffee',
     recenter: 'root',
-    scale: 0.27382299999999998,
+    scale: 0.027382299999999998,
   },
   version: '0.54:2',
 }

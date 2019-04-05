@@ -63,6 +63,7 @@
     file: 'sampledata/models/pizza.obj',
     name: 'pizza',
     recenter: 'root',
+    scale: 0.1,
   },
   samplers: [
     {
