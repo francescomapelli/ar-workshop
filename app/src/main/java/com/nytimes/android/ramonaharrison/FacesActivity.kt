@@ -34,11 +34,6 @@ class FacesActivity : AppCompatActivity() {
 
 
         val scene = sceneView.scene
-        /*scene.addOnUpdateListener { frameTime: FrameTime ->
-            if (faceRegionsRenderable != null && faceMeshTexture != null) {
-                // Attach nodes for tracked faces and remove untracked faces
-            }
-        }*/
 
         scene.addOnUpdateListener { frameTime: FrameTime ->
             if (faceRegionsRenderable != null && faceMeshTexture != null) {
